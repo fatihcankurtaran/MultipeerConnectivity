@@ -1,4 +1,0 @@
-#Mon Mar 18 00:06:19 EET 2019
-base.0=C\:\\Projects\\UnityProject\\Temp\\gradleOut\\build\\intermediates\\transforms\\dexMerger\\debug\\0
-path.0=classes.dex
-renamed.0=classes.dex
