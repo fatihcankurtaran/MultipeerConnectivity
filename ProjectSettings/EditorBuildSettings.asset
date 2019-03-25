@@ -5,9 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/NearbyDroids/MainMenu.unity
     guid: d0afc8110505f4398aa39bd311e2ac4f
-  - enabled: 1
+  - enabled: 0
     path: Assets/NearbyDroids/game.unity
     guid: 075cfa0f30953401f8b2b47300e600e5
+  - enabled: 1
+    path: Assets/RealMainMenu.unity
+    guid: 479610c3ad0a4f14ab0719590ccc7889
+  - enabled: 1
+    path: Assets/MainMenu.unity
+    guid: dd967ff62ab304947ada5c4ad4f199f3
+  - enabled: 1
+    path: Assets/CreateRoom.unity
+    guid: bc4b1a145579f064d887ff7b6ec4c14b
