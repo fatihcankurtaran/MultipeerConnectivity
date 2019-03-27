@@ -20,7 +20,7 @@ public class RoomManager : MonoBehaviour
     void Awake()
     {
       
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
     }
     // Use this for initialization
