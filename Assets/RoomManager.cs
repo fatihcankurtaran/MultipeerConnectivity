@@ -28,15 +28,15 @@ public class RoomManager : MonoBehaviour
     //private string localPlayerName;
     public const string RoomNameKey = "roomname";
     public const string PlayerNameKey = "playername";
-    public GameObject  textObject;
+    public Text  textObject;
 	NearbyPlayer globalNearbyPlayer = null ;
 
     //private bool joining;
     void Awake()
     {
-		
-        //DontDestroyOnLoad(gameObject);
-
+    
+        DontDestroyOnLoad(gameObject);
+        
     }
     // Use this for initialization
     void Start()
@@ -47,13 +47,19 @@ public class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (connected == true) {
-			if (globalNearbyPlayer != null) {NearbyRoom.LookupRoomByEndpoint (myEndpointId).MessageHandler.Invoke (globalNearbyPlayer, Encoding.ASCII.GetBytes ("asdasd"));
-			}
+        if (connected == true) {
+            if (globalNearbyPlayer != null) { NearbyRoom.LookupRoomByEndpoint(myEndpointId).MessageHandler.Invoke(globalNearbyPlayer, Encoding.ASCII.GetBytes("asdasd"));
 
-		}
 
-        
+            }
+
+            PlayGamesPlatform.Nearby.SendReliable(new List<string>{NearbyRoom.endPoints }, Encoding.ASCII.GetBytes("awodkaodkapdkawopdkapdkpoakdpawkdpwakdoadkapdkaw"));
+            
+        }
+        PlayGamesPlatform.Nearby.SendReliable(new List<string> { NearbyRoom.endPoints }, Encoding.ASCII.GetBytes("awodkaodkapdkawopdkapdkpoakdpawkdpwakdoadkapdkaw"));
+
+
+
 
     }
     public bool onDiscovery
@@ -94,9 +100,9 @@ public class RoomManager : MonoBehaviour
         nearbyRoom.AlwaysOpen = true;
         isClient = false; 
         nearbyRoom.OpenRoom();
+
         
-
-
+       
         //List<string> appIdentifiers = new List<string>();
         //appIdentifiers.Add(PlayGamesPlatform.Nearby.GetAppBundleId());
         //PlayGamesPlatform.Nearby.StartAdvertising(
@@ -130,6 +136,12 @@ public class RoomManager : MonoBehaviour
                   discoveredEndpoint.ServiceId + " " +
                   discoveredEndpoint.EndpointId + " " +
                   discoveredEndpoint.Name);
+        // textObject.
+        GameManager gameManager = new GameManager();
+        gameManager.SendMessageToChat("Found Endpoint: " +
+                  discoveredEndpoint.ServiceId + " " +
+                  discoveredEndpoint.EndpointId + " " +
+                  discoveredEndpoint.Name, Message.MessageType.info);
         PlayGamesPlatform.Nearby.SendConnectionRequest(
                "Local Game player",  // the user-friendly name
                discoveredEndpoint.EndpointId,   // the discovered endpoint	
@@ -196,6 +208,10 @@ public class RoomManager : MonoBehaviour
 			NearbyPlayer nearbyPlayer = new NearbyPlayer(SystemInfo.deviceUniqueIdentifier,myEndpointId,myName);
             
             room.JoinRoom(nearbyPlayer, Encoding.ASCII.GetBytes("asdasd"), OnRoomJoined);
+            GameManager gameManager = new GameManager();
+            
+            gameManager.SendMessageToChat(room.EndpointId + " :  " + room.Name, Message.MessageType.info);
+                textObject.text = room.EndpointId + " :  " + room.Name;
             // GameObject obj = Instantiate() as GameObject;
         }
     }
@@ -211,6 +227,9 @@ public class RoomManager : MonoBehaviour
             // the first payload is sent with the response so we can initialize
             // the game scene.
             OnMessageReceived(room.Address, response.Payload);
+            textObject.text = room.Address  + " :  " + response.Payload.ToString() + response.RemoteEndpointId;
+            GameManager gameManager = new GameManager();
+            gameManager.SendMessageToChat(room.Address + " :  " + response.Payload.ToString()+ " : " + response.RemoteEndpointId, Message.MessageType.info);
             connected = true;
         }
     }
@@ -222,11 +241,15 @@ public class RoomManager : MonoBehaviour
 		Debug.Log (data.ToString ());
 
         UpdateGameStateFromData(data);
+        GameManager gameManager = new GameManager();
+        gameManager.SendMessageToChat(sender.Name + " : " + sender.EndpointId + " : " + data.ToString(), Message.MessageType.info);
+
+
     }
     internal void UpdateGameStateFromData(byte[] data)
     {
         MemoryStream ms = new MemoryStream(data);
-      
+        
         
     }
 

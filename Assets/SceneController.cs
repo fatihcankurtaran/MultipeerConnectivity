@@ -7,7 +7,7 @@ public class SceneController : MonoBehaviour {
 
 	// Use this for initialization
 
-    public void ChangeScene(int sceneId )
+    public static void ChangeScene(int sceneId )
     {
 
         

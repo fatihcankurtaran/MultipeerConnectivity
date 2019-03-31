@@ -388,22 +388,22 @@ Prefab:
     - target: {fileID: 224023693229395306, guid: b1bc33de0cf5b014f88764620f158989,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 431
+      value: 584
       objectReference: {fileID: 0}
     - target: {fileID: 224023693229395306, guid: b1bc33de0cf5b014f88764620f158989,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1412
+      value: 1535
       objectReference: {fileID: 0}
     - target: {fileID: 224023693229395306, guid: b1bc33de0cf5b014f88764620f158989,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 549.2
+      value: 857
       objectReference: {fileID: 0}
     - target: {fileID: 224023693229395306, guid: b1bc33de0cf5b014f88764620f158989,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 187.5
+      value: 575
       objectReference: {fileID: 0}
     - target: {fileID: 224023693229395306, guid: b1bc33de0cf5b014f88764620f158989,
         type: 2}
@@ -453,11 +453,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224023693229395306, guid: b1bc33de0cf5b014f88764620f158989,
     type: 2}
   m_PrefabInternal: {fileID: 909858322}
---- !u!1 &909858324 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1565383292297174, guid: b1bc33de0cf5b014f88764620f158989,
+--- !u!114 &909858325 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114271275616641566, guid: b1bc33de0cf5b014f88764620f158989,
     type: 2}
   m_PrefabInternal: {fileID: 909858322}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &996387175
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +533,6 @@ GameObject:
   - component: {fileID: 1037903830}
   - component: {fileID: 1037903829}
   - component: {fileID: 1037903833}
-  - component: {fileID: 1037903834}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -628,19 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c644c8af48846458bf0ffc68ef8c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textObject: {fileID: 909858324}
---- !u!114 &1037903834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1037903828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31c644c8af48846458bf0ffc68ef8c44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textObject: {fileID: 0}
+  textObject: {fileID: 909858325}
 --- !u!1 &1149090679
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,7 +664,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -130.25, y: 348}
+  m_AnchoredPosition: {x: -130.25, y: 143}
   m_SizeDelta: {x: 591.7, y: 182.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1149090681

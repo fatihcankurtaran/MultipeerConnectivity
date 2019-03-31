@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public InputField chatBox;
     public Color playerMessage, info;
     public Button sendButton;
+
     void Start()
     {
 

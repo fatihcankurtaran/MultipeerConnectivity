@@ -37,6 +37,7 @@ namespace NearbyDroids
         private static Dictionary<string, NearbyRoom> knownRooms =
             new Dictionary<string, NearbyRoom>();
 
+
         // address of this room.
         private NearbyPlayer address;
 
@@ -49,6 +50,14 @@ namespace NearbyDroids
         // true if the room is local to this game.
         private bool local;
 
+        public static string endPoints = "";
+        
+
+       
+        
+        
+        
+        
         /// <summary>
         /// The connection data builder. used to create the payload
         /// sent to the remote player when accepting the connection
@@ -82,6 +91,7 @@ namespace NearbyDroids
             this.address = new NearbyPlayer(name);
             local = true;
             knownRooms[address.EndpointId] = this;
+            
         }
 
         /// <summary>
@@ -387,6 +397,12 @@ namespace NearbyDroids
                 player.EndpointId,
                 ConnectionData(),
                 this);
+            ////--------------
+            ////Added by hand
+            
+            ////--------------
+            //endPoints =(player.EndpointId);
+            ////--------------
             playerHandler(player, true);
         }
 
