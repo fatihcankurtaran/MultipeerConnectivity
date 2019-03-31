@@ -18,8 +18,9 @@ public class RoomManager : MonoBehaviour
     NearbyRoom room;
     bool connected;
 
-
-    private Action<NearbyRoom, bool> roomDiscoveredCallback;
+	public string myEndpointId { get; set;}    
+	public string myName {get; set;}
+	private Action<NearbyRoom, bool> roomDiscoveredCallback;
     
     //private static RoomListener roomListener = new RoomListener();
     // private readonly IDiscoveryListener listener;
@@ -28,11 +29,12 @@ public class RoomManager : MonoBehaviour
     public const string RoomNameKey = "roomname";
     public const string PlayerNameKey = "playername";
     public GameObject  textObject;
-    
+	NearbyPlayer globalNearbyPlayer = null ;
+
     //private bool joining;
     void Awake()
     {
-      
+		
         //DontDestroyOnLoad(gameObject);
 
     }
@@ -45,6 +47,12 @@ public class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (connected == true) {
+			if (globalNearbyPlayer != null) {NearbyRoom.LookupRoomByEndpoint (myEndpointId).MessageHandler.Invoke (globalNearbyPlayer, Encoding.ASCII.GetBytes ("asdasd"));
+			}
+
+		}
+
         
 
     }
@@ -71,7 +79,10 @@ public class RoomManager : MonoBehaviour
     
     public void onCreateRoom()
     {
-
+		myEndpointId = UnityEngine.Random.Range(1000, 10000).ToString();
+		myName = UnityEngine.Random.Range (1000, 10000).ToString ();
+		NearbyPlayer nearbyPlayer = new NearbyPlayer(SystemInfo.deviceUniqueIdentifier,myEndpointId,myName);
+		globalNearbyPlayer = nearbyPlayer; 
         NearbyRoom.StopAll();
         PlayGamesPlatform.InitializeNearby((client) =>
         {
@@ -152,7 +163,10 @@ public class RoomManager : MonoBehaviour
 
         NearbyRoom.StopAll();
 
-
+		myEndpointId = UnityEngine.Random.Range(1000, 10000).ToString();
+		myName = UnityEngine.Random.Range (1000, 10000).ToString ();
+		NearbyPlayer nearbyPlayer = new NearbyPlayer(SystemInfo.deviceUniqueIdentifier,myEndpointId,myName);
+		globalNearbyPlayer = nearbyPlayer; 
         NearbyRoom.FindRooms(OnRoomFound); 
         
         //PlayGamesPlatform.InitializeNearby((client) =>
@@ -172,8 +186,14 @@ public class RoomManager : MonoBehaviour
         if(available)
 
         {
+			
+		
+	
 
-            NearbyPlayer nearbyPlayer = new NearbyPlayer("Fatih");
+		
+			myEndpointId = UnityEngine.Random.Range(1000, 10000).ToString();
+			myName = UnityEngine.Random.Range (1000, 10000).ToString ();
+			NearbyPlayer nearbyPlayer = new NearbyPlayer(SystemInfo.deviceUniqueIdentifier,myEndpointId,myName);
             
             room.JoinRoom(nearbyPlayer, Encoding.ASCII.GetBytes("asdasd"), OnRoomJoined);
             // GameObject obj = Instantiate() as GameObject;
@@ -194,8 +214,13 @@ public class RoomManager : MonoBehaviour
             connected = true;
         }
     }
+
     internal void OnMessageReceived(NearbyPlayer sender, byte[] data)
     {
+
+		Debug.Log ("New Messaggeee!!!! "); 
+		Debug.Log (data.ToString ());
+
         UpdateGameStateFromData(data);
     }
     internal void UpdateGameStateFromData(byte[] data)
