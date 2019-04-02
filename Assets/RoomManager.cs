@@ -47,16 +47,16 @@ public class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (connected == true) {
-            if (globalNearbyPlayer != null) { NearbyRoom.LookupRoomByEndpoint(myEndpointId).MessageHandler.Invoke(globalNearbyPlayer, Encoding.ASCII.GetBytes("asdasd"));
+        //if (connected == true) {
+          //  if (globalNearbyPlayer != null) { NearbyRoom.LookupRoomByEndpoint(myEndpointId).MessageHandler.Invoke(globalNearbyPlayer, Encoding.ASCII.GetBytes("asdasd"));
 
 
-            }
+            //}
 
-            PlayGamesPlatform.Nearby.SendReliable(new List<string>{NearbyRoom.endPoints }, Encoding.ASCII.GetBytes("awodkaodkapdkawopdkapdkpoakdpawkdpwakdoadkapdkaw"));
+            //PlayGamesPlatform.Nearby.SendReliable(new List<string>{NearbyRoom.endPoints }, Encoding.ASCII.GetBytes("awodkaodkapdkawopdkapdkpoakdpawkdpwakdoadkapdkaw"));
             
-        }
-        PlayGamesPlatform.Nearby.SendReliable(new List<string> { NearbyRoom.endPoints }, Encoding.ASCII.GetBytes("awodkaodkapdkawopdkapdkpoakdpawkdpwakdoadkapdkaw"));
+       // }
+//        PlayGamesPlatform.Nearby.SendReliable(new List<string> { NearbyRoom.endPoints }, Encoding.ASCII.GetBytes("awodkaodkapdkawopdkapdkpoakdpawkdpwakdoadkapdkaw"));
 
 
 
@@ -87,6 +87,7 @@ public class RoomManager : MonoBehaviour
     {
 		myEndpointId = UnityEngine.Random.Range(1000, 10000).ToString();
 		myName = UnityEngine.Random.Range (1000, 10000).ToString ();
+
 		NearbyPlayer nearbyPlayer = new NearbyPlayer(SystemInfo.deviceUniqueIdentifier,myEndpointId,myName);
 		globalNearbyPlayer = nearbyPlayer; 
         NearbyRoom.StopAll();
@@ -208,10 +209,7 @@ public class RoomManager : MonoBehaviour
 			NearbyPlayer nearbyPlayer = new NearbyPlayer(SystemInfo.deviceUniqueIdentifier,myEndpointId,myName);
             
             room.JoinRoom(nearbyPlayer, Encoding.ASCII.GetBytes("asdasd"), OnRoomJoined);
-            GameManager gameManager = new GameManager();
-            
-            gameManager.SendMessageToChat(room.EndpointId + " :  " + room.Name, Message.MessageType.info);
-                textObject.text = room.EndpointId + " :  " + room.Name;
+           
             // GameObject obj = Instantiate() as GameObject;
         }
     }
@@ -228,9 +226,7 @@ public class RoomManager : MonoBehaviour
             // the game scene.
             OnMessageReceived(room.Address, response.Payload);
             textObject.text = room.Address  + " :  " + response.Payload.ToString() + response.RemoteEndpointId;
-            GameManager gameManager = new GameManager();
-            gameManager.SendMessageToChat(room.Address + " :  " + response.Payload.ToString()+ " : " + response.RemoteEndpointId, Message.MessageType.info);
-            connected = true;
+             connected = true;
         }
     }
 
@@ -241,9 +237,7 @@ public class RoomManager : MonoBehaviour
 		Debug.Log (data.ToString ());
 
         UpdateGameStateFromData(data);
-        GameManager gameManager = new GameManager();
-        gameManager.SendMessageToChat(sender.Name + " : " + sender.EndpointId + " : " + data.ToString(), Message.MessageType.info);
-
+      
 
     }
     internal void UpdateGameStateFromData(byte[] data)
